@@ -1,2 +1,0 @@
-shlibs:Depends=libc6 (>= 2.13-28), libglib2.0-0 (>= 2.37.3), libreadline6 (>= 6.0)
-misc:Depends=
