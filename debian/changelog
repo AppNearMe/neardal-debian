@@ -1,0 +1,5 @@
+libneardal (0.14-1) unstable; urgency=low
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Donatien Garnier <donatien.garnier@appnearme.com>  Wed, 07 Jan 2015 17:16:23 +0000

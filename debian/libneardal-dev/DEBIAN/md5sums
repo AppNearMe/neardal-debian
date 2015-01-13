@@ -1,0 +1,8 @@
+dc825db0ee7ed5872ed659e323f5c9b2  usr/include/neardal/neardal.h
+7ee0563dd61021f93913e02da0bb18ac  usr/include/neardal/neardal_errors.h
+90fcf75f4ad1f1970ff633a5dc660eee  usr/lib/libneardal.a
+6b14c1965882bd8a09aec4124d56b5bf  usr/lib/pkgconfig/neardal.pc
+13e60edebcbb65884ffd9f3ef02999d0  usr/share/doc/libneardal-dev/README
+b9b8b28f8ac1b8bdc8a83de66654e4f8  usr/share/doc/libneardal-dev/README.Debian
+4c9d7d587e719cc488ad35a484ebaf08  usr/share/doc/libneardal-dev/changelog.Debian.gz
+8477feaa49856902bb4e4d1b074914c9  usr/share/doc/libneardal-dev/copyright

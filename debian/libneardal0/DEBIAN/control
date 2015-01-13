@@ -1,0 +1,12 @@
+Package: libneardal0
+Source: libneardal
+Version: 0.14-1
+Architecture: armhf
+Maintainer: Donatien Garnier <donatien.garnier@appnearme.com>
+Installed-Size: 172
+Depends: libglib2.0-0 (>= 2.37.3), libreadline6 (>= 6.0), libc6 (>= 2.13-28)
+Section: libs
+Priority: extra
+Homepage: https://github.com/connectivity/neardal
+Description: C APIs for Neard NFC daemon
+ Provides a simple C APIs to exchange datas with our NFC daemon (Neard) present on the system.
