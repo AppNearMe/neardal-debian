@@ -773,6 +773,11 @@ errorCode_t neardal_get_tag_properties(const char *tagName,
 		err = NEARDAL_SUCCESS;
 	}
 
+	/* ISO14443A-specific properties */
+	tagClient->iso14443aAtqa		= g_strdup(tagProp->iso14443aAtqa);
+	tagClient->iso14443aSak		= g_strdup(tagProp->iso14443aSak);
+	tagClient->iso14443aUid		= g_strdup(tagProp->iso14443aUid);
+
 	tagClient->nbTagTypes = 0;
 	tagClient->tagType = NULL;
 	/* Count TagTypes */
@@ -792,12 +797,6 @@ errorCode_t neardal_get_tag_properties(const char *tagName,
 		tagClient->tagType[ct] = g_strdup(tagProp->tagType[ct]);
 		ct++;
 	}
-
-	/* ISO14443A-specific properties */
-	tagClient->iso14443aAtqa		= g_strdup(tagProp->iso14443aAtqa);
-	tagClient->iso14443aSak		= g_strdup(tagProp->iso14443aAtqa);
-	tagClient->iso14443aUid		= g_strdup(tagProp->iso14443aUid);
-
 
 	err = NEARDAL_SUCCESS;
 
