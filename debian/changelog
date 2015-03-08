@@ -1,5 +1,5 @@
-libneardal (0.14-1) unstable; urgency=low
+libneardal (0.14.1-1) unstable; urgency=low
 
-  * Initial release
+  * Added ISO14443A info
 
- -- Donatien Garnier (AppNearMe) <donatien.garnier@appnearme.com>  Wed, 07 Jan 2015 17:16:23 +0000
+ -- Donatien Garnier (AppNearMe) <donatien.garnier@appnearme.com>  Wed, 08 Mar 2015 18:16:13 +0000
