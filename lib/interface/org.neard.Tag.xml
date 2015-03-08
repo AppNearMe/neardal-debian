@@ -8,5 +8,8 @@
 		<method name="GetRawNDEF">
 			<arg name="NDEF" type="ay" direction="out"/>
 		</method>
+		<property name="Iso14443aUid" type="s" access="read"/>
+		<property name="Iso14443aAtqa" type="s" access="read"/>
+		<property name="Iso14443aSak" type="s" access="read"/>
 	</interface>
 </node>

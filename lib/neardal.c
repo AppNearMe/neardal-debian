@@ -705,6 +705,14 @@ void neardal_free_tag(neardal_tag *tag)
 		g_free(tag->tagType[ct++]);
 	g_free(tag->tagType);
 
+	/* Freeing ISO14443A-specific properties */
+	if( tag->iso14443aAtqa != NULL )
+		g_free( tag->iso14443aAtqa );
+	if( tag->iso14443aSak != NULL )
+		g_free( tag->iso14443aSak );
+	if( tag->iso14443aUid != NULL )
+		g_free( tag->iso14443aUid );
+
 	/* Freeing adapter struct */
 	g_free(tag);
 }
@@ -765,6 +773,11 @@ errorCode_t neardal_get_tag_properties(const char *tagName,
 		err = NEARDAL_SUCCESS;
 	}
 
+	/* ISO14443A-specific properties */
+	tagClient->iso14443aAtqa		= g_strdup(tagProp->iso14443aAtqa);
+	tagClient->iso14443aSak		= g_strdup(tagProp->iso14443aSak);
+	tagClient->iso14443aUid		= g_strdup(tagProp->iso14443aUid);
+
 	tagClient->nbTagTypes = 0;
 	tagClient->tagType = NULL;
 	/* Count TagTypes */
@@ -784,6 +797,7 @@ errorCode_t neardal_get_tag_properties(const char *tagName,
 		tagClient->tagType[ct] = g_strdup(tagProp->tagType[ct]);
 		ct++;
 	}
+
 	err = NEARDAL_SUCCESS;
 
 exit:
@@ -1081,7 +1095,9 @@ exit:
  * used to pass remote Out Of Band data.
  * If one of this callback is null, the agent is unregistered
  ****************************************************************************/
-errorCode_t neardal_agent_set_handover_cb(oob_push_agent_cb cb_oob_push_agent
+errorCode_t neardal_agent_set_handover_cb(
+						const gchar* carrier
+					  , oob_push_agent_cb cb_oob_push_agent
 					  , oob_req_agent_cb  cb_oob_req_agent
 				, oob_agent_free_cb cb_oob_release_agent
 					  , void *user_data)
@@ -1101,6 +1117,7 @@ errorCode_t neardal_agent_set_handover_cb(oob_push_agent_cb cb_oob_push_agent
 	agent.objPath			= g_strdup_printf("%s/handover/%d"
 							 , AGENT_PREFIX
 							 , agent.pid);
+	agent.carrierType	= g_strdup(carrier);
 	if (agent.objPath == NULL)
 		goto exit;
 
@@ -1109,17 +1126,20 @@ errorCode_t neardal_agent_set_handover_cb(oob_push_agent_cb cb_oob_push_agent
 		goto exit;
 
 	if (cb_oob_push_agent != NULL && cb_oob_req_agent != NULL)
-		/* RegisterNDEFAgent */
+		/* RegisterHandoverAgent */
 		org_neard_manager_call_register_handover_agent_sync(
 							       neardalMgr.proxy,
 							       agent.objPath,
+							       agent.carrierType,
 							       NULL,
 							   &neardalMgr.gerror);
 	else
-		/* UnregisterNDEFAgent */
+		/* UnregisterHandoverAgent */
 		org_neard_manager_call_unregister_handover_agent_sync(
 							neardalMgr.proxy,
-							agent.objPath, NULL,
+							agent.objPath,
+							agent.carrierType,
+							NULL,
 							 &neardalMgr.gerror);
 
 

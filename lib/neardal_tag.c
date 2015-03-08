@@ -104,6 +104,22 @@ static errorCode_t neardal_tag_prv_read_properties(TagProp *tagProp)
 	if (tmpOut != NULL)
 		tagProp->readOnly = g_variant_get_boolean(tmpOut);
 
+	/* ISO14443A-specific fields (optional) */
+	tmpOut = g_variant_lookup_value(tmp, "Iso14443aAtqa",
+					G_VARIANT_TYPE_STRING);
+	if (tmpOut != NULL)
+		tagProp->iso14443aAtqa = g_variant_dup_string(tmpOut, NULL);
+
+	tmpOut = g_variant_lookup_value(tmp, "Iso14443aSak",
+					G_VARIANT_TYPE_STRING);
+	if (tmpOut != NULL)
+		tagProp->iso14443aSak = g_variant_dup_string(tmpOut, NULL);
+
+	tmpOut = g_variant_lookup_value(tmp, "Iso14443aUid",
+					G_VARIANT_TYPE_STRING);
+	if (tmpOut != NULL)
+		tagProp->iso14443aUid = g_variant_dup_string(tmpOut, NULL);
+
 exit:
 	return err;
 }
@@ -167,6 +183,12 @@ static void neardal_tag_prv_free(TagProp **tagProp)
 	g_free((*tagProp)->name);
 	g_free((*tagProp)->type);
 	g_strfreev((*tagProp)->tagType);
+	if( (*tagProp)->iso14443aAtqa != NULL )
+		g_free( (*tagProp)->iso14443aAtqa );
+	if( (*tagProp)->iso14443aSak != NULL )
+		g_free( (*tagProp)->iso14443aSak );
+	if( (*tagProp)->iso14443aUid != NULL )
+		g_free( (*tagProp)->iso14443aUid );
 	g_free((*tagProp));
 	(*tagProp) = NULL;
 }
@@ -279,12 +301,7 @@ void neardal_tag_prv_remove(TagProp *tagProp)
 	NEARDAL_ASSERT(tagProp != NULL);
 
 	NEARDAL_TRACEF("Removing tag:%s\n", tagProp->name);
-	/* Remove all tags */
-	while (g_list_length(tagProp->rcdList)) {
-		node = g_list_first(tagProp->rcdList);
-		rcdProp = (RcdProp *) node->data;
-		neardal_rcd_remove(rcdProp);
-	}
+
 	adpProp = tagProp->parent;
 	adpProp->tagList = g_list_remove(adpProp->tagList,
 					 (gconstpointer) tagProp);
