@@ -705,6 +705,14 @@ void neardal_free_tag(neardal_tag *tag)
 		g_free(tag->tagType[ct++]);
 	g_free(tag->tagType);
 
+	/* Freeing ISO14443A-specific properties */
+	if( tag->iso14443aAtqa != NULL )
+		g_free( tag->iso14443aAtqa );
+	if( tag->iso14443aSak != NULL )
+		g_free( tag->iso14443aSak );
+	if( tag->iso14443aUid != NULL )
+		g_free( tag->iso14443aUid );
+
 	/* Freeing adapter struct */
 	g_free(tag);
 }
@@ -784,6 +792,13 @@ errorCode_t neardal_get_tag_properties(const char *tagName,
 		tagClient->tagType[ct] = g_strdup(tagProp->tagType[ct]);
 		ct++;
 	}
+
+	/* ISO14443A-specific properties */
+	tagClient->iso14443aAtqa		= g_strdup(tagProp->iso14443aAtqa);
+	tagClient->iso14443aSak		= g_strdup(tagProp->iso14443aAtqa);
+	tagClient->iso14443aUid		= g_strdup(tagProp->iso14443aUid);
+
+
 	err = NEARDAL_SUCCESS;
 
 exit:

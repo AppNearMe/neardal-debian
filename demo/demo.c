@@ -76,6 +76,18 @@ static void dump_tag(neardal_tag *tag)
 	}
 	printf("\n");
 	printf("---- ReadOnly:\t\t%s\n", tag->readOnly ? "TRUE" : "FALSE");
+	if(tag->iso14443aAtqa != NULL)
+	{
+		printf(".. ISO14443A ATQA:\t\t'%s'\n", tag->iso14443aAtqa);
+	}
+	if(tag->iso14443aSak != NULL)
+	{
+		printf(".. ISO14443A SAK:\t\t'%s'\n", tag->iso14443aSak);
+	}
+	if(tag->iso14443aUid != NULL)
+	{
+		printf(".. ISO14443A UID:\t\t'%s'\n", tag->iso14443aUid);
+	}
 }
 
 static void dump_record(neardal_record *record)

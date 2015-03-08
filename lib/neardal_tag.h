@@ -41,6 +41,10 @@ typedef struct {
 	gchar		**tagType;	/* array of tag types */
 	gsize		tagTypeLen;
 	gboolean	readOnly;	/* Read-Only flag */
+
+	char		*iso14443aAtqa;	/* ISO14443A ATQA */
+	char		*iso14443aSak;	/* ISO14443A SAK */
+	char		*iso14443aUid;	/* ISO14443A UID */
 } TagProp;
 
 /*****************************************************************************

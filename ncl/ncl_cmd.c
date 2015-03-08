@@ -212,6 +212,19 @@ static void ncl_cmd_prv_dump_tag(neardal_tag *tag)
 	NCL_CMD_PRINT("\n");
 	NCL_CMD_PRINT(".. ReadOnly:\t\t%s\n"	,
 		      tag->readOnly ? "TRUE" : "FALSE");
+
+	if(tag->iso14443aAtqa != NULL)
+	{
+		NCL_CMD_PRINT(".. ISO14443A ATQA:\t\t'%s'\n", tag->iso14443aAtqa);
+	}
+	if(tag->iso14443aSak != NULL)
+	{
+		NCL_CMD_PRINT(".. ISO14443A SAK:\t\t'%s'\n", tag->iso14443aSak);
+	}
+	if(tag->iso14443aUid != NULL)
+	{
+		NCL_CMD_PRINT(".. ISO14443A UID:\t\t'%s'\n", tag->iso14443aUid);
+	}
 }
 
 /*****************************************************************************

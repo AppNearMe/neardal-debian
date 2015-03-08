@@ -88,6 +88,12 @@ typedef struct {
 	const char	*type;
 /*! @brief Read-Only flag (is tag writable?) */
 	short		readOnly;
+/*! @brief ISO14443A ATQA (if present) */
+	char		*iso14443aAtqa;
+/*! @brief ISO14443A SAK (if present) */
+	char		*iso14443aSak;
+/*! @brief ISO14443A UID (if present) */
+	char		*iso14443aUid;
 } neardal_tag;
 
 /*!
