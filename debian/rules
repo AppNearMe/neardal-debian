@@ -28,8 +28,8 @@ override_dh_autoreconf_clean:
 	rm install-sh
 	rm lib/Makefile.in
 	rm ltmain.sh
- 	rm missing
- 	rm ncl/Makefile.in
+	rm missing
+	rm ncl/Makefile.in
 
 
 override_dh_install:
