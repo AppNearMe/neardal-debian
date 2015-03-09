@@ -18,16 +18,16 @@ override_dh_autoreconf:
 override_dh_autoreconf_clean:
 	dh_autoreconf_clean
 	rm Makefile.in
- 	rm aclocal.m4
- 	rm config.guess
+	rm aclocal.m4
+	rm config.guess
 	rm config.h.in
- 	rm config.sub
- 	rm configure
- 	rm demo/Makefile.in
- 	rm depcomp
- 	rm install-sh
- 	rm lib/Makefile.in
- 	rm ltmain.sh
+	rm config.sub
+	rm configure
+	rm demo/Makefile.in
+	rm depcomp
+	rm install-sh
+	rm lib/Makefile.in
+	rm ltmain.sh
  	rm missing
  	rm ncl/Makefile.in
 
