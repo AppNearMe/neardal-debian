@@ -1,5 +1,5 @@
-libneardal (0.14.1-1) unstable; urgency=low
+libneardal (0.14.2-1) unstable; urgency=low
 
-  * Added ISO14443A info
+  * Added ISO14443A & Felica info, Neardal update
 
- -- Donatien Garnier (AppNearMe) <donatien.garnier@appnearme.com>  Wed, 08 Mar 2015 18:16:13 +0000
+ -- Donatien Garnier (AppNearMe) <donatien.garnier@appnearme.com>  Thu, 09 Apr 2015 12:29:13 +0001
