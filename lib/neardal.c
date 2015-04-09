@@ -705,13 +705,14 @@ void neardal_free_tag(neardal_tag *tag)
 		g_free(tag->tagType[ct++]);
 	g_free(tag->tagType);
 
-	/* Freeing ISO14443A-specific properties */
-	if( tag->iso14443aAtqa != NULL )
-		g_free( tag->iso14443aAtqa );
-	if( tag->iso14443aSak != NULL )
-		g_free( tag->iso14443aSak );
-	if( tag->iso14443aUid != NULL )
-		g_free( tag->iso14443aUid );
+	/* Freeing ISO14443A & Felica-specific properties */
+    g_clear_pointer(&tag->iso14443aAtqa, g_bytes_unref);
+    g_clear_pointer(&tag->iso14443aSak, g_bytes_unref);
+    g_clear_pointer(&tag->iso14443aUid, g_bytes_unref);
+    g_clear_pointer(&tag->felicaManufacturer, g_bytes_unref);
+    g_clear_pointer(&tag->felicaCid, g_bytes_unref);
+    g_clear_pointer(&tag->felicaIc, g_bytes_unref);
+    g_clear_pointer(&tag->felicaMaxRespTimes, g_bytes_unref);
 
 	/* Freeing adapter struct */
 	g_free(tag);
@@ -773,10 +774,21 @@ errorCode_t neardal_get_tag_properties(const char *tagName,
 		err = NEARDAL_SUCCESS;
 	}
 
-	/* ISO14443A-specific properties */
-	tagClient->iso14443aAtqa		= g_strdup(tagProp->iso14443aAtqa);
-	tagClient->iso14443aSak		= g_strdup(tagProp->iso14443aSak);
-	tagClient->iso14443aUid		= g_strdup(tagProp->iso14443aUid);
+	/* ISO14443A-specific, Felica-Specific properties */
+	if(tagProp->iso14443aAtqa != NULL)
+		tagClient->iso14443aAtqa		= g_bytes_ref(tagProp->iso14443aAtqa);
+	if(tagProp->iso14443aSak != NULL)
+		tagClient->iso14443aSak		= g_bytes_ref(tagProp->iso14443aSak);
+	if(tagProp->iso14443aUid != NULL)
+		tagClient->iso14443aUid		= g_bytes_ref(tagProp->iso14443aUid);
+	if(tagProp->felicaManufacturer != NULL)
+		tagClient->felicaManufacturer		= g_bytes_ref(tagProp->felicaManufacturer);
+	if(tagProp->felicaCid != NULL)
+		tagClient->felicaCid		= g_bytes_ref(tagProp->felicaCid);
+	if(tagProp->felicaIc != NULL)
+		tagClient->felicaIc		= g_bytes_ref(tagProp->felicaIc);
+	if(tagProp->felicaMaxRespTimes != NULL)
+		tagClient->felicaMaxRespTimes		= g_bytes_ref(tagProp->felicaMaxRespTimes);
 
 	tagClient->nbTagTypes = 0;
 	tagClient->tagType = NULL;

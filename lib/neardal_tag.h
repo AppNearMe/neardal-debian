@@ -42,9 +42,14 @@ typedef struct {
 	gsize		tagTypeLen;
 	gboolean	readOnly;	/* Read-Only flag */
 
-	char		*iso14443aAtqa;	/* ISO14443A ATQA */
-	char		*iso14443aSak;	/* ISO14443A SAK */
-	char		*iso14443aUid;	/* ISO14443A UID */
+	GBytes		*iso14443aAtqa;	/* ISO14443A ATQA */
+	GBytes		*iso14443aSak;	/* ISO14443A SAK */
+	GBytes		*iso14443aUid;	/* ISO14443A UID */
+
+	GBytes		*felicaManufacturer;	/* Felica Manufacturer info */
+	GBytes		*felicaCid;	/* Felica CID */
+	GBytes		*felicaIc;	/* Felica IC code */
+	GBytes		*felicaMaxRespTimes;	/* Felica Max response times */
 } TagProp;
 
 /*****************************************************************************
